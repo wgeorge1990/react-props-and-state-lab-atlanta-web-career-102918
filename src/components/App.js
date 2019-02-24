@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Filters from './Filters'
 import PetBrowser from './PetBrowser'
 
@@ -8,37 +7,38 @@ class App extends React.Component {
       pets: [],
       filters: {
         type: 'all'
-      },
-      filteredPets: []
+      }
     }
+
     componentDidMount = () => {
       this.fetchPets();
     }
 
-  filterPets = () => {
-    
-  }
-    
-
   fetchPets = (e) => {
-    fetch('/api/pets').then(res => res.json()).then(data => this.setState({
+    let endpoint = '/api/pets';
+
+    if (this.state.filters.type !== 'all') {
+      endpoint += `?type=${this.state.filters.type}`;
+    }
+
+    fetch(endpoint).then(res => res.json()).then(data => this.setState({
       pets: data
-    }))
-  }
+    }));
+
+  };
 
   onFindPetsClick = (e) => {
-    console.log("hello")
-    console.log(this.state.pets)
+    this.fetchPets()
   }
 
   onTypeChange = (e) => {
-    console.log(e.target.value)
     this.setState({
       filters: {...this.state.filters, type: e.target.value}
     })
   }
 
   render() {
+   
     return (
       <div className="ui container">
         <header>

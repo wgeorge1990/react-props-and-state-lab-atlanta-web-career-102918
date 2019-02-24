@@ -10,10 +10,10 @@ class Pet extends React.Component {
           <a className="header">
             {/*'♀' OR '♂' */}
             {gender === 'male' ? '♀' : '♂'}
-            {name}
+            Name: {name}
           </a>
           <div className="meta">
-            <span className="date"> {type}</span>
+            <span className="date"> Type of Animal: {type}</span>
           </div>
           <div className="description">
             <p>Age: {age}</p>
